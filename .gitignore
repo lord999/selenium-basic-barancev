@@ -1,0 +1,8 @@
+/eclipse-selenium-sample-project/bin
+/eclipse-selenium-sample-project/.settings
+/netbeans-selenium-sample-project/nbproject/private/
+/netbeans-selenium-sample-project/build/
+/eclipse-selenium-sample-project/*.log
+/idea-selenium-sample-project
+/netbeans-selenium-sample-project
+/eclipse-selenium-sample-project/target

@@ -1,5 +1,5 @@
 package com.example.pages;
 
-public class AnyPage extends Page {
+public abstract class AnyPage extends Page {
 
 }

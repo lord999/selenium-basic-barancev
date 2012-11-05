@@ -1,36 +1,21 @@
 package com.example.tests;
 
-import java.util.concurrent.TimeUnit;
 import org.junit.*;
 
 import static org.junit.Assert.*;
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
-import ru.esteru.selenium.factory.WebDriverFactory;
+import com.example.pages.InternalPage;
 
-public class ChangeEmailTest {
-
-	private WebDriver driver;
-	private String baseUrl;
-	private StringBuffer verificationErrors = new StringBuffer();
-
-	@Before
-	public void setUp() throws Exception {
-		driver = WebDriverFactory.getDriver(DesiredCapabilities.firefox());
-		baseUrl = "http://localhost/";
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-	}
-
+public class ChangeEmailTest extends TestBase {
 
 	@Test
 	public void testEmailChange() {
-		goToMainPage();
-		loginAs("admin", "admin");
+		InternalPage aPage = goToMainPage().loginWithValidCredentials("admin", "admin");
 		gotoUserProfile();
 		changeEmailTo("admin@admin.ru");
 		assertTrue(isOnUserManagementPage());
-		logout();
+		aPage.logout();
 	}
 	
 	private boolean isOnUserManagementPage() {
@@ -50,31 +35,5 @@ public class ChangeEmailTest {
 	    driver.findElement(By.linkText("My profile")).click();
 	}
 
-
-	private void logout() {
-		// logout
-		driver.findElement(By.linkText("Log out")).click();
-		driver.switchTo().alert().accept();
-	}
-
-	private void loginAs(String username, String password) {
-		driver.findElement(By.id("username")).clear();
-		driver.findElement(By.id("username")).sendKeys(username);
-		driver.findElement(By.name("password")).clear();
-		driver.findElement(By.name("password")).sendKeys(password);
-		driver.findElement(By.name("submit")).click();
-	}
-
-	private void goToMainPage() {
-		driver.get(baseUrl + "/php4dvd/");
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		String verificationErrorString = verificationErrors.toString();
-		if (!"".equals(verificationErrorString)) {
-			fail(verificationErrorString);
-		}
-	}
 
 }

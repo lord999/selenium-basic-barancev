@@ -21,4 +21,23 @@ public class LoginPage extends AnyPage {
     return loginForm.isDisplayed();
   }
 
+  @Override
+  public void tryToOpen() {
+    MyPageFactory.getPage(driver, InternalPage.class).logout();
+  }
+
+  public InternalPage loginWithValidCredentials(String username, String password) {
+    userNameField.sendKeys(username);
+    passwordField.sendKeys(password);
+    loginButtton.click();
+    return MyPageFactory.getPage(driver, InternalPage.class);
+  }
+
+  public LoginPage loginWithWrongCredentials(String username, String password) {
+    userNameField.sendKeys(username);
+    passwordField.sendKeys(password);
+    loginButtton.click();
+    return MyPageFactory.getPage(driver, LoginPage.class);
+  }
+
 }

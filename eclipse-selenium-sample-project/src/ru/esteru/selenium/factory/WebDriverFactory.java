@@ -70,9 +70,12 @@ public class WebDriverFactory {
 
   public static void dismissDriver() {
     if (driver != null) {
-      driver.quit();
-      driver = null;
-      key = null;
+      try {
+        driver.quit();
+        driver = null;
+        key = null;
+      } catch (Throwable t) {
+      }
     }
   }
 
@@ -84,6 +87,7 @@ public class WebDriverFactory {
         : createRemoteDriver(hub, capabilities);
     key = capabilities.toString() + ":" + hub;
     count = 0;
+    driver.manage().window().maximize();
     return driver;
   }
 
