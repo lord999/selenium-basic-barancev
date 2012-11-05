@@ -28,7 +28,7 @@ public class TestBase {
     caps.setPlatform(platform);
 
     driver = WebDriverFactory.getDriver(caps);
-    baseUrl = "http://localhost/";
+    baseUrl = "http://192.168.1.100/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
