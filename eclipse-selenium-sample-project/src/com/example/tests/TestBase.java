@@ -3,6 +3,7 @@ package com.example.tests;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -19,8 +20,16 @@ public class TestBase {
   @Before
   public void setUp() throws Exception {
     WebDriverFactory.setDefaultHub(System.getProperty("webdriver.hub"));
+
     DesiredCapabilities caps = new DesiredCapabilities();
     caps.setBrowserName(System.getProperty("webdriver.browser", "firefox"));
+
+    Platform platform = Platform.valueOf(System.getProperty("webdriver.platform"));
+    if (platform == null) {
+      platform = Platform.getCurrent();
+    }
+    caps.setPlatform(platform);
+
     driver = WebDriverFactory.getDriver(caps);
     baseUrl = "http://localhost/";
     driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
