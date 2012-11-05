@@ -24,7 +24,7 @@ public class TestBase {
     DesiredCapabilities caps = new DesiredCapabilities();
     caps.setBrowserName(System.getProperty("webdriver.browser", "firefox"));
 
-    Platform platform = Platform.valueOf(System.getProperty("webdriver.platform", "XP"));
+    Platform platform = Platform.valueOf(System.getProperty("webdriver.platform", "WINDOWS"));
     caps.setPlatform(platform);
 
     driver = WebDriverFactory.getDriver(caps);
